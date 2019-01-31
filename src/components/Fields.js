@@ -2,6 +2,7 @@ import React from 'react'
 import {Field} from 'redux-form';
 
 function Fields(props) {
+    
     return (
         <div className="form-group">
             <label htmlFor={props.name} className="form-label">

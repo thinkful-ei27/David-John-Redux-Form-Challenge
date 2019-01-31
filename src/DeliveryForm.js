@@ -6,14 +6,7 @@ import Button from './components/Button';
 import {reduxForm, SubmissionError} from 'redux-form';
 import Fields from './components/Fields';
 import {required, isFiveCharsLong, isANumber} from './validators';
-
-const options = [
-    'My delivery has not arrived',
-    'The wrong item was delivered',
-    'Part of my order was missing',
-    'Some of my order arrived damaged',
-    'Other (give details below)'
-]
+import {connect} from 'react-redux';
 
 export class DeliveryForm extends Component {
     onSubmit(values) {
@@ -53,7 +46,7 @@ export class DeliveryForm extends Component {
         })
     }
   render() {
-      const optionMap = options.map(option => <option value={option}>{option}</option>);
+      const optionMap = this.props.options.map(option => <option value={option}>{option}</option>);
     return (
       <div>
         <h2>Report a problem with your delivery</h2>
@@ -93,6 +86,15 @@ export class DeliveryForm extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+    console.log(state);
+    return {
+        options: state.options.options
+    }
+}
+
+DeliveryForm = connect(mapStateToProps)(DeliveryForm);
 
 export default reduxForm({
     form: 'delivery',
